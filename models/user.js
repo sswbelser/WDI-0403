@@ -12,12 +12,6 @@ var UserSchema = new Schema({
 	passwordDigest: String
 });
 
-// define user model
-var User = mongoose.model('User', UserSchema);
-
-// export user model
-module.exports = User;
-
 // create a new user with secure (hashed) password
 UserSchema.statics.createSecure = function (email, password, callback) {
 	// `this` references our schema
@@ -60,3 +54,9 @@ UserSchema.methods.checkPassword = function (password) {
 	// run hashing algorithm (with salt) on password user enters in order to compare with `passwordDigest`
 	return bcrypt.compareSync(password, this.passwordDigest);
 };
+
+// define user model
+var User = mongoose.model('User', UserSchema);
+
+// export user model
+module.exports = User;
